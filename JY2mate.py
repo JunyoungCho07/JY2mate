@@ -2,6 +2,32 @@ import yt_dlp
 import os
 from google.colab import files  # Colab에서 파일 다운로드
 import hashlib
+# import re
+
+# def sanitize_filename(filename):
+#     """
+#     파일명에서 허용되지 않는 문자를 제거합니다.
+#     """
+#     return re.sub(r'[\\/*?:"<>|]', "", filename)
+
+def download_all_files(folder_path):
+  """
+  폴더 내의 모든 파일을 다운로드하는 함수.
+  - folder_path: 다운로드할 폴더의 경로
+  """
+  # 폴더가 존재하는지 확인
+  if not os.path.exists(folder_path):
+      print(f"폴더가 존재하지 않습니다: {folder_path}")
+      return
+
+  # 폴더 내의 모든 파일 다운로드
+  for filename in os.listdir(folder_path):
+      file_path = os.path.join(folder_path, filename)
+      if os.path.isfile(file_path):
+          print(f"다운로드 중: {file_path}")
+          files.download(file_path)
+      else:
+          print(f"파일이 아닙니다: {file_path}")
 
 def download_audio(url, download_path="/content/downloads", is_playlist=False):
     """
@@ -30,7 +56,7 @@ def download_audio(url, download_path="/content/downloads", is_playlist=False):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
           info_dict = ydl.extract_info(url, download=False)
-          video_title = info_dict.get('title', None)
+          video_title = info_dict.get('title', None)#sanitize_filename(info_dict.get('title', None))
           file_extentions = "mp3"
           #file_extentions=info_dict.get('ext',None)
           ldownload_path = os.path.join(download_path, f"{video_title}.{file_extentions}")
@@ -49,7 +75,9 @@ def download_audio(url, download_path="/content/downloads", is_playlist=False):
                 print("단일 오디오 다운로드 중...")
                 ydl.download([url])
                 print(f"단일 오디오 다운로드 완료: {ldownload_path}")
-                files.download(ldownload_path)
+                folder_path = '/content/downloads'
+                download_all_files(folder_path)
+                # files.download(ldownload_path)
 
     except Exception as e:
         print(f"오디오 다운로드 중 오류 발생: {e}")
@@ -77,7 +105,7 @@ def download_video(url, download_path="/content/downloads", is_playlist=False):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
           info_dict = ydl.extract_info(url, download=False)
-          video_title = info_dict.get('title', None)
+          video_title = info_dict.get('title', None)#sanitize_filename(info_dict.get('title', None))
           file_extentions=info_dict.get('ext',None)
           ldownload_path = os.path.join(download_path, f"{video_title}.{file_extentions}")
           if is_playlist:
@@ -95,7 +123,9 @@ def download_video(url, download_path="/content/downloads", is_playlist=False):
                 print("단일 영상 다운로드 중...")
                 ydl.download([url])
                 print(f"단일 영상 다운로드 완료: {ldownload_path}")
-                files.download(ldownload_path)
+                folder_path = '/content/downloads'
+                download_all_files(folder_path)
+                # files.download(ldownload_path)
 
     except Exception as e:
         print(f"영상 다운로드 중 오류 발생: {e}")
@@ -114,6 +144,7 @@ def main():
     if mode_choice not in ["1", "2", "3"]:
         print("잘못된 선택입니다. 프로그램을 종료합니다.")
         return
+
     if mode_choice == "3":
       download_path = "/content/downloads"
       if os.path.exists(download_path):
@@ -154,7 +185,7 @@ if __name__ == "__main__":
     hex_dig = hash_object.hexdigest()
 
     # print(f"SHA-256 hash of '{data}' is: {hex_dig}")
-    if hex_dig == "619968b14ba65880f250eeddbc24392a53647a685812312b4e6b7011fcbdb71f":
+    if hex_dig == "7b65ee222af36b78b07cdfa4aebb92b5748803ba9b08befd22ae59eda2af5ea4":
       main()
     else:
       print("잘못된 인증코드입니다. 프로그램을 종료합니다.")
