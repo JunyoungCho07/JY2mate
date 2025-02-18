@@ -26,8 +26,8 @@ def download_all_files(folder_path):
       file_path = os.path.join(folder_path, filename)
       if os.path.isfile(file_path):
           print(f"다운로드 중: {file_path}")
-          importlib.reload(files)  # files 모듈을 다시 로드
-          files.download(file_path)
+          # importlib.reload(files)  # files 모듈을 다시 로드
+          # files.download(file_path)
       else:
           print(f"파일이 아닙니다: {file_path}")
 
@@ -72,15 +72,15 @@ def download_audio(url, download_path="/content/downloads", is_playlist=False):
                 print(f"재생목록이 압축되었습니다: {zip_file}")
 
                 # Colab에서 다운로드
-                importlib.reload(files)  # files 모듈을 다시 로드
-                files.download(zip_file)
+                # importlib.reload(files)  # files 모듈을 다시 로드
+                # files.download(zip_file)
           else:
                 print("단일 오디오 다운로드 중...")
                 ydl.download([url])
                 print(f"단일 오디오 다운로드 완료: {ldownload_path}")
                 folder_path = '/content/downloads'
-                importlib.reload(files)  # files 모듈을 다시 로드
-                download_all_files(folder_path)
+                # importlib.reload(files)  # files 모듈을 다시 로드
+                # download_all_files(folder_path)
                 # files.download(ldownload_path)
 
     except Exception as e:
@@ -122,15 +122,15 @@ def download_video(url, download_path="/content/downloads", is_playlist=False):
                 print(f"재생목록이 압축되었습니다: {zip_file}")
 
                 # Colab에서 다운로드
-                importlib.reload(files)  # files 모듈을 다시 로드
-                files.download(zip_file)
+                # importlib.reload(files)  # files 모듈을 다시 로드
+                # files.download(zip_file)
           else:
                 print("단일 영상 다운로드 중...")
                 ydl.download([url])
                 print(f"단일 영상 다운로드 완료: {ldownload_path}")
                 folder_path = '/content/downloads'
-                importlib.reload(files)  # files 모듈을 다시 로드
-                download_all_files(folder_path)
+                # importlib.reload(files)  # files 모듈을 다시 로드
+                # download_all_files(folder_path)
                 # files.download(ldownload_path)
 
     except Exception as e:
