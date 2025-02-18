@@ -1,6 +1,7 @@
 import yt_dlp
 import os
 from google.colab import files  # Colab에서 파일 다운로드
+import hashlib
 
 def download_audio(url, download_path="./downloads", is_playlist=False):
     """
@@ -144,7 +145,7 @@ def main():
 
 if __name__ == "__main__":
     # Sample data
-    data = input("Enter the licence code")
+    data = input("Enter the licence code\t")
     
     # Creating a hash object using the SHA-256 algorithm
     hash_object = hashlib.sha256(data.encode())
