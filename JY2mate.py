@@ -143,17 +143,17 @@ def main():
 
 
 if __name__ == "__main__":
-# Sample data
-data = input("Enter the licence code")
-
-# Creating a hash object using the SHA-256 algorithm
-hash_object = hashlib.sha256(data.encode())
-
-# Getting the hexadecimal representation of the hash
-hex_dig = hash_object.hexdigest()
-
-# print(f"SHA-256 hash of '{data}' is: {hex_dig}")
-if hex_dig == "619968b14ba65880f250eeddbc24392a53647a685812312b4e6b7011fcbdb71f":
-  main()
-else:
-  print("잘못된 인증코드입니다. 프로그램을 종료합니다.")
+    # Sample data
+    data = input("Enter the licence code")
+    
+    # Creating a hash object using the SHA-256 algorithm
+    hash_object = hashlib.sha256(data.encode())
+    
+    # Getting the hexadecimal representation of the hash
+    hex_dig = hash_object.hexdigest()
+    
+    # print(f"SHA-256 hash of '{data}' is: {hex_dig}")
+    if hex_dig == "619968b14ba65880f250eeddbc24392a53647a685812312b4e6b7011fcbdb71f":
+      main()
+    else:
+      print("잘못된 인증코드입니다. 프로그램을 종료합니다.")
