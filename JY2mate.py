@@ -3,7 +3,7 @@ import os
 from google.colab import files  # Colab에서 파일 다운로드
 import hashlib
 
-def download_audio(url, download_path="./downloads", is_playlist=False):
+def download_audio(url, download_path="/content/downloads", is_playlist=False):
     """
     유튜브 오디오(MP3)를 다운로드하는 함수.
     - url: 유튜브 URL
@@ -55,7 +55,7 @@ def download_audio(url, download_path="./downloads", is_playlist=False):
         print(f"오디오 다운로드 중 오류 발생: {e}")
 
 
-def download_video(url, download_path="./downloads", is_playlist=False):
+def download_video(url, download_path="/content/downloads", is_playlist=False):
     """
     유튜브 영상을 다운로드하는 함수.
     - url: 유튜브 URL
@@ -115,7 +115,7 @@ def main():
         print("잘못된 선택입니다. 프로그램을 종료합니다.")
         return
     if mode_choice == "3":
-      download_path = "./downloads"
+      download_path = "/content/downloads"
       if os.path.exists(download_path):
         for filename in os.listdir(download_path):
           os.remove(os.path.join(download_path,filename))
@@ -134,7 +134,7 @@ def main():
 
     is_playlist = content_choice == "2"
     url = input("유튜브 URL을 입력하세요: ").strip()
-    download_path = "./downloads"  # 기본 다운로드 경로
+    download_path = "/content/downloads"  # 기본 다운로드 경로
 
     # 다운로드 실행
     if is_audio:
@@ -145,16 +145,17 @@ def main():
 
 if __name__ == "__main__":
     # Sample data
-    data = input("Enter the licence code\t")
-    
+    data = input("Enter the licence code")
+
     # Creating a hash object using the SHA-256 algorithm
     hash_object = hashlib.sha256(data.encode())
-    
+
     # Getting the hexadecimal representation of the hash
     hex_dig = hash_object.hexdigest()
-    
+
     # print(f"SHA-256 hash of '{data}' is: {hex_dig}")
     if hex_dig == "619968b14ba65880f250eeddbc24392a53647a685812312b4e6b7011fcbdb71f":
       main()
     else:
       print("잘못된 인증코드입니다. 프로그램을 종료합니다.")
+      
