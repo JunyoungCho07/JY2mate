@@ -191,7 +191,7 @@ if __name__ == "__main__":
     hex_dig = hash_object.hexdigest()
 
     # print(f"SHA-256 hash of '{data}' is: {hex_dig}")
-    if hex_dig == "7b65ee222af36b78b07cdfa4aebb92b5748803ba9b08befd22ae59eda2af5ea4":
+    if hex_dig == "7b65ee222af36b78b07cdfa4aebb92b5748803ba9b08befd22ae59eda2af5ea4" or hex_dig == "8fa29cc1346570d6ab1057202a0d62edaccf48517de7980dac517b0751601d69":
       main()
     else:
       print("잘못된 인증코드입니다. 프로그램을 종료합니다.")
